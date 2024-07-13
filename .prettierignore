@@ -1,0 +1,3 @@
+# tell prettier do not scan
+
+node_modules

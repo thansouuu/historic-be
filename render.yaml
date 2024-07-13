@@ -1,0 +1,7 @@
+services:
+    - type: web
+      name: may-homestay-backend
+      env: node
+      buildCommand: yarn install
+      startCommand: yarn prod
+      staticPublishPath: ./public
