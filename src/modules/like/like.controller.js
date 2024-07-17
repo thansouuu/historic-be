@@ -21,14 +21,21 @@ export const likeProduct = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        if (!existingUser.likes.includes(productTitle)) {
+        // Check if the productTitle is already in likes
+        const index = existingUser.likes.indexOf(productTitle);
+        if (index === -1) {
+            // If not liked, add to likes
             existingUser.likes.push(productTitle);
             await existingUser.save();
+            res.status(200).json({ message: 'Product liked successfully' });
+        } else {
+            // If liked, remove from likes (unlike)
+            existingUser.likes.splice(index, 1);
+            await existingUser.save();
+            res.status(200).json({ message: 'Product unliked successfully' });
         }
-
-        res.status(200).json({ message: 'Product liked successfully' });
     } catch (error) {
-        console.error('Error liking product:', error);
+        console.error('Error liking/unliking product:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
