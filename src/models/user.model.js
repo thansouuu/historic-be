@@ -62,4 +62,9 @@ userSchema.statics.isEmailExisted = async function (email) {
     return { existed: Boolean(user), data: user };
 };
 
+// userSchema.statics.isPasswordExisted = async function (password) {
+//     const user = await this.findOne({ password }).lean();
+//     return { existed: Boolean(user), data: user };
+// };
+
 export const userModel = model('users', userSchema);

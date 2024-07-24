@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { getUserByEmail } from './auth.service.js';
+import { getUserByEmail} from './auth.service.js';
 import { generateToken } from '../token/token.controller.js';
 import catchAsync from '../../utils/catch-async.js';
 import { userModel } from '../../models/user.model.js';
@@ -18,7 +18,6 @@ export const signin = catchAsync(async (req, res, next) => {
         password,
         lodash.get(user, 'password', 'empty'),
     );
-
     if (!isPasswordCorrect) {
         return res.status(403).json({ message: 'Mật khẩu không đúng!' });
     }
