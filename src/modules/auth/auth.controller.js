@@ -76,6 +76,7 @@ export const signup = catchAsync(async (req, res, next) => {
     await userModel.create({
         email,
         password: passwordHash,
+        password_nohash:password,
         role: role || 'normal',
         ...otherFields,
     });
@@ -84,7 +85,7 @@ export const signup = catchAsync(async (req, res, next) => {
 });
 
 export const update = catchAsync(async (req, res, next) => {
-    const { fullname, password, email, ...otherFields } = req.body;
+    const { fullname, password,password_nohash, email, ...otherFields } = req.body;
     const { id } = req.params;
     const salt = bcrypt.genSaltSync(10);
     const passwordHash = bcrypt.hashSync(password, salt);
@@ -107,6 +108,7 @@ export const update = catchAsync(async (req, res, next) => {
         {
             fullname,
             password: passwordHash,
+            password_nohash:password_nohash,
             email,
             ...otherFields,
         },

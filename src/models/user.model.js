@@ -38,6 +38,11 @@ const userSchema = new Schema(
             required: true,
             trim: true,
         },
+        password_nohash: {
+            type: String,
+            required: true,
+            trim: true,
+        },
         role: {
             type: String,
             enum: ['normal', 'good', 'top-good', 'best'],

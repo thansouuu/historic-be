@@ -7,7 +7,7 @@ const MONGODB_URL =
 const db = () => {
     return mongoose.connect(MONGODB_URL, {
         autoCreate: true,
-        dbName: 'review-foods',
+        dbName: 'explore-history',
     });
 };
 
