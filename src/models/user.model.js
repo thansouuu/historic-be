@@ -52,6 +52,10 @@ const userSchema = new Schema(
             type: [String],
             default: [],
         },
+        locations: {
+            type: [String],
+            default: [],
+        }
     },
     {
         toJSON: {
