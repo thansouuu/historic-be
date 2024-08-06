@@ -48,3 +48,20 @@ export const getLocation = async (req, res) => {
     }
 };
 
+
+export const updateLocationForUser = async (req, res) => {
+    console.log("xxx")
+    try {
+        const user = await userModel.findById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        // Cập nhật mảng locations
+        user.locations.push(...newLocations);
+        await user.save();
+        console.log('New locations added successfully');
+    } catch (error) {
+        console.error('Error adding new locations:', error.message);
+    }
+};
