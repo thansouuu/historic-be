@@ -50,18 +50,24 @@ export const getLocation = async (req, res) => {
 
 
 export const updateLocationForUser = async (req, res) => {
-    console.log("xxx")
+    console.log("xxx" + req)
+    const { userId } = req.params;
+    const { points } = req.body;
     try {
-        const user = await userModel.findById(userId);
+        const locations = points.map(point => `${point[0]},${point[1]}`);
+        const user = await userModel.findByIdAndUpdate(
+          userId,
+          { $set: { locations } },
+          { new: true, runValidators: true }
+        );
+    
         if (!user) {
-            throw new Error('User not found');
+          return res.status(404).send('User not found');
         }
-
-        // Cập nhật mảng locations
-        user.locations.push(...newLocations);
-        await user.save();
-        console.log('New locations added successfully');
-    } catch (error) {
-        console.error('Error adding new locations:', error.message);
+    
+        res.status(200).send('Locations updated successfully');
+      } catch (error) {
+        console.error('Error updating locations:', error);
+        res.status(500).send('Internal server error');
     }
 };
