@@ -69,6 +69,10 @@ const feedbackSchema = new Schema(
         productId: {
             type: String,
         },
+        likes: {
+            type: [String],
+            default: [],
+        },
     },
     {
         toJSON: {
